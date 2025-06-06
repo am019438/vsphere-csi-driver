@@ -30,250 +30,249 @@ import (
 )
 
 const (
-	adminUser                                  = "Administrator@vsphere.local"
-	apiServerIPs                               = "API_SERVER_IPS"
-	attacherContainerName                      = "csi-attacher"
-	nginxImage                                 = "registry.k8s.io/nginx-slim:0.26"
-	nginxImage4upg                             = "registry.k8s.io/nginx-slim:0.27"
-	retainClaimPolicy                          = "Retain"
-	cloudInitLabel                             = "CloudInit"
-	configSecret                               = "vsphere-config-secret"
-	contollerClusterKubeConfig                 = "CONTROLLER_CLUSTER_KUBECONFIG"
-	controlPlaneLabel                          = "node-role.kubernetes.io/control-plane"
-	crdCNSNodeVMAttachment                     = "cnsnodevmattachments"
-	crdCNSVolumeMetadatas                      = "cnsvolumemetadatas"
-	crdCNSFileAccessConfig                     = "cnsfileaccessconfigs"
-	crdtriggercsifullsyncsName                 = "csifullsync"
-	crdGroup                                   = "cns.vmware.com"
-	crdVersion                                 = "v1alpha1"
-	crdVirtualMachineImages                    = "virtualmachineimages"
-	crdVirtualMachines                         = "virtualmachines"
-	crdVirtualMachineService                   = "virtualmachineservice"
+	AdminUser                                  = "Administrator@vsphere.local"
+	ApiServerIPs                               = "API_SERVER_IPS"
+	AttacherContainerName                      = "csi-attacher"
+	NginxImage                                 = "registry.k8s.io/nginx-slim:0.26"
+	NginxImage4upg                             = "registry.k8s.io/nginx-slim:0.27"
+	RetainClaimPolicy                          = "Retain"
+	CloudInitLabel                             = "CloudInit"
+	ConfigSecret                               = "vsphere-config-secret"
+	ContollerClusterKubeConfig                 = "CONTROLLER_CLUSTER_KUBECONFIG"
+	ControlPlaneLabel                          = "node-role.kubernetes.io/control-plane"
+	CrdCNSNodeVMAttachment                     = "cnsnodevmattachments"
+	CrdCNSVolumeMetadatas                      = "cnsvolumemetadatas"
+	CrdCNSFileAccessConfig                     = "cnsfileaccessconfigs"
+	CrdtriggercsifullsyncsName                 = "csifullsync"
+	CrdGroup                                   = "cns.vmware.com"
+	CrdVersion                                 = "v1alpha1"
+	CrdVirtualMachineImages                    = "virtualmachineimages"
+	CrdVirtualMachines                         = "virtualmachines"
+	CrdVirtualMachineService                   = "virtualmachineservice"
 	csiSystemNamespace                         = "vmware-system-csi"
-	csiFssCM                                   = "internal-feature-states.csi.vsphere.vmware.com"
-	csiVolAttrVolType                          = "vSphere CNS Block Volume"
-	csiDriverContainerName                     = "vsphere-csi-controller"
-	datacenter                                 = "DATACENTER"
-	defaultFullSyncIntervalInMin               = "30"
-	defaultProvisionerTimeInSec                = "300"
-	defaultFullSyncWaitTime                    = 1800
-	defaultPandoraSyncWaitTime                 = 90
-	defaultK8sNodesUpWaitTime                  = 25
-	destinationDatastoreURL                    = "DESTINATION_VSPHERE_DATASTORE_URL"
-	disklibUnlinkErr                           = "DiskLib_Unlink"
-	diskSize1GB                                = "1Gi"
-	diskSize                                   = "2Gi"
-	diskSizeSmall                              = "100Mi"
-	diskSizeLarge                              = "100Gi"
-	diskSizeInMb                               = int64(2048)
-	diskSizeInMinMb                            = int64(200)
-	e2eTestPassword                            = "E2E-test-password!23"
-	e2evSphereCSIDriverName                    = "csi.vsphere.vmware.com"
-	ensureAccessibilityMModeType               = "ensureObjectAccessibility"
-	envClusterFlavor                           = "CLUSTER_FLAVOR"
-	envDiskSizeLarge                           = "LARGE_DISK_SIZE"
-	envCSINamespace                            = "CSI_NAMESPACE"
-	envContentLibraryUrl                       = "CONTENT_LIB_URL"
-	envContentLibraryUrlSslThumbprint          = "CONTENT_LIB_THUMBPRINT"
-	envEsxHostIP                               = "ESX_TEST_HOST_IP"
-	envFileServiceDisabledSharedDatastoreURL   = "FILE_SERVICE_DISABLED_SHARED_VSPHERE_DATASTORE_URL"
-	envFullSyncWaitTime                        = "FULL_SYNC_WAIT_TIME"
-	envGatewayVmIp                             = "GATEWAY_VM_IP"
-	envGatewayVmUser                           = "GATEWAY_VM_USER"
-	envGatewayVmPasswd                         = "GATEWAY_VM_PASSWD"
-	envHciMountRemoteDs                        = "USE_HCI_MESH_DS"
-	envInaccessibleZoneDatastoreURL            = "INACCESSIBLE_ZONE_VSPHERE_DATASTORE_URL"
-	envNonSharedStorageClassDatastoreURL       = "NONSHARED_VSPHERE_DATASTORE_URL"
-	envPandoraSyncWaitTime                     = "PANDORA_SYNC_WAIT_TIME"
-	envK8sNodesUpWaitTime                      = "K8S_NODES_UP_WAIT_TIME"
-	envRegionZoneWithNoSharedDS                = "TOPOLOGY_WITH_NO_SHARED_DATASTORE"
-	envRegionZoneWithSharedDS                  = "TOPOLOGY_WITH_SHARED_DATASTORE"
-	envRemoteHCIDsUrl                          = "REMOTE_HCI_DS_URL"
-	envSharedDatastoreURL                      = "SHARED_VSPHERE_DATASTORE_URL"
-	envSharedVVOLDatastoreURL                  = "SHARED_VVOL_DATASTORE_URL"
-	envSharedNFSDatastoreURL                   = "SHARED_NFS_DATASTORE_URL"
-	envSharedVMFSDatastoreURL                  = "SHARED_VMFS_DATASTORE_URL"
-	envSharedVMFSDatastore2URL                 = "SHARED_VMFS_DATASTORE2_URL"
-	envVMClass                                 = "VM_CLASS"
-	envVsanDirectSetup                         = "USE_VSAN_DIRECT_DATASTORE_IN_WCP"
-	envVsanDDatastoreURL                       = "SHARED_VSAND_DATASTORE_URL"
-	envVsanDDatastore2URL                      = "SHARED_VSAND_DATASTORE2_URL"
-	envStoragePolicyNameForNonSharedDatastores = "STORAGE_POLICY_FOR_NONSHARED_DATASTORES"
-	envStoragePolicyNameForSharedDatastores    = "STORAGE_POLICY_FOR_SHARED_DATASTORES"
-	envStoragePolicyNameForHCIRemoteDatastores = "STORAGE_POLICY_FOR_HCI_REMOTE_DS"
-	envStoragePolicyNameForVsanVmfsDatastores  = "STORAGE_POLICY_FOR_VSAN_VMFS_DATASTORES"
-	envStoragePolicyNameForSharedDatastores2   = "STORAGE_POLICY_FOR_SHARED_DATASTORES_2"
-	envStoragePolicyNameForVmfsDatastores      = "STORAGE_POLICY_FOR_VMFS_DATASTORES"
-	envStoragePolicyNameForNfsDatastores       = "STORAGE_POLICY_FOR_NFS_DATASTORES"
-	envStoragePolicyNameForVvolDatastores      = "STORAGE_POLICY_FOR_VVOL_DATASTORES"
-	envStoragePolicyNameFromInaccessibleZone   = "STORAGE_POLICY_FROM_INACCESSIBLE_ZONE"
-	envStoragePolicyNameWithThickProvision     = "STORAGE_POLICY_WITH_THICK_PROVISIONING"
-	envStoragePolicyNameWithEncryption         = "STORAGE_POLICY_WITH_ENCRYPTION"
-	envKeyProvider                             = "KEY_PROVIDER"
-	envSupervisorClusterNamespace              = "SVC_NAMESPACE"
-	envSupervisorClusterNamespaceToDelete      = "SVC_NAMESPACE_TO_DELETE"
-	envTopologyWithOnlyOneNode                 = "TOPOLOGY_WITH_ONLY_ONE_NODE"
-	envTopologyWithInvalidTagInvalidCat        = "TOPOLOGY_WITH_INVALID_TAG_INVALID_CAT"
-	envTopologyWithInvalidTagValidCat          = "TOPOLOGY_WITH_INVALID_TAG_VALID_CAT"
-	envNumberOfGoRoutines                      = "NUMBER_OF_GO_ROUTINES"
-	envWorkerPerRoutine                        = "WORKER_PER_ROUTINE"
-	envVmdkDiskURL                             = "DISK_URL_PATH"
-	envVmsvcVmImageName                        = "VMSVC_IMAGE_NAME"
-	envVolumeOperationsScale                   = "VOLUME_OPS_SCALE"
-	envComputeClusterName                      = "COMPUTE_CLUSTER_NAME"
-	envTKGImage                                = "TKG_IMAGE_NAME"
-	envVmknic4Vsan                             = "VMKNIC_FOR_VSAN"
-	execCommand                                = "/bin/df -T /mnt/volume1 | " +
+	CsiFssCM                                   = "internal-feature-states.csi.vsphere.vmware.com"
+	CsiVolAttrVolType                          = "vSphere CNS Block Volume"
+	CsiDriverContainerName                     = "vsphere-csi-controller"
+	Datacenter                                 = "DATACENTER"
+	DefaultFullSyncIntervalInMin               = "30"
+	DefaultProvisionerTimeInSec                = "300"
+	DefaultFullSyncWaitTime                    = 1800
+	DefaultPandoraSyncWaitTime                 = 90
+	DefaultK8sNodesUpWaitTime                  = 25
+	DestinationDatastoreURL                    = "DESTINATION_VSPHERE_DATASTORE_URL"
+	DisklibUnlinkErr                           = "DiskLib_Unlink"
+	DiskSize1GB                                = "1Gi"
+	DiskSize                                   = "2Gi"
+	DiskSizeLarge                              = "100Gi"
+	DiskSizeInMb                               = int64(2048)
+	DiskSizeInMinMb                            = int64(200)
+	E2eTestPassword                            = "E2E-test-password!23"
+	E2evSphereCSIDriverName                    = "csi.vsphere.vmware.com"
+	EnsureAccessibilityMModeType               = "ensureObjectAccessibility"
+	EnvClusterFlavor                           = "CLUSTER_FLAVOR"
+	EnvDiskSizeLarge                           = "LARGE_DISK_SIZE"
+	EnvCSINamespace                            = "CSI_NAMESPACE"
+	EnvContentLibraryUrl                       = "CONTENT_LIB_URL"
+	EnvContentLibraryUrlSslThumbprint          = "CONTENT_LIB_THUMBPRINT"
+	EnvEsxHostIP                               = "ESX_TEST_HOST_IP"
+	EnvFileServiceDisabledSharedDatastoreURL   = "FILE_SERVICE_DISABLED_SHARED_VSPHERE_DATASTORE_URL"
+	EnvFullSyncWaitTime                        = "FULL_SYNC_WAIT_TIME"
+	EnvGatewayVmIp                             = "GATEWAY_VM_IP"
+	EnvGatewayVmUser                           = "GATEWAY_VM_USER"
+	EnvGatewayVmPasswd                         = "GATEWAY_VM_PASSWD"
+	EnvHciMountRemoteDs                        = "USE_HCI_MESH_DS"
+	EnvInaccessibleZoneDatastoreURL            = "INACCESSIBLE_ZONE_VSPHERE_DATASTORE_URL"
+	EnvNonSharedStorageClassDatastoreURL       = "NONSHARED_VSPHERE_DATASTORE_URL"
+	EnvPandoraSyncWaitTime                     = "PANDORA_SYNC_WAIT_TIME"
+	EnvK8sNodesUpWaitTime                      = "K8S_NODES_UP_WAIT_TIME"
+	EnvRegionZoneWithNoSharedDS                = "TOPOLOGY_WITH_NO_SHARED_DATASTORE"
+	EnvRegionZoneWithSharedDS                  = "TOPOLOGY_WITH_SHARED_DATASTORE"
+	EnvRemoteHCIDsUrl                          = "REMOTE_HCI_DS_URL"
+	EnvSharedDatastoreURL                      = "SHARED_VSPHERE_DATASTORE_URL"
+	EnvSharedVVOLDatastoreURL                  = "SHARED_VVOL_DATASTORE_URL"
+	EnvSharedNFSDatastoreURL                   = "SHARED_NFS_DATASTORE_URL"
+	EnvSharedVMFSDatastoreURL                  = "SHARED_VMFS_DATASTORE_URL"
+	EnvSharedVMFSDatastore2URL                 = "SHARED_VMFS_DATASTORE2_URL"
+	EnvVMClass                                 = "VM_CLASS"
+	EnvVsanDirectSetup                         = "USE_VSAN_DIRECT_DATASTORE_IN_WCP"
+	EnvVsanDDatastoreURL                       = "SHARED_VSAND_DATASTORE_URL"
+	EnvVsanDDatastore2URL                      = "SHARED_VSAND_DATASTORE2_URL"
+	EnvStoragePolicyNameForNonSharedDatastores = "STORAGE_POLICY_FOR_NONSHARED_DATASTORES"
+	EnvStoragePolicyNameForSharedDatastores    = "STORAGE_POLICY_FOR_SHARED_DATASTORES"
+	EnvStoragePolicyNameForHCIRemoteDatastores = "STORAGE_POLICY_FOR_HCI_REMOTE_DS"
+	EnvStoragePolicyNameForVsanVmfsDatastores  = "STORAGE_POLICY_FOR_VSAN_VMFS_DATASTORES"
+	EnvStoragePolicyNameForSharedDatastores2   = "STORAGE_POLICY_FOR_SHARED_DATASTORES_2"
+	EnvStoragePolicyNameForVmfsDatastores      = "STORAGE_POLICY_FOR_VMFS_DATASTORES"
+	EnvStoragePolicyNameForNfsDatastores       = "STORAGE_POLICY_FOR_NFS_DATASTORES"
+	EnvStoragePolicyNameForVvolDatastores      = "STORAGE_POLICY_FOR_VVOL_DATASTORES"
+	EnvStoragePolicyNameFromInaccessibleZone   = "STORAGE_POLICY_FROM_INACCESSIBLE_ZONE"
+	EnvStoragePolicyNameWithThickProvision     = "STORAGE_POLICY_WITH_THICK_PROVISIONING"
+	EnvStoragePolicyNameWithEncryption         = "STORAGE_POLICY_WITH_ENCRYPTION"
+	EnvKeyProvider                             = "KEY_PROVIDER"
+	EnvSupervisorClusterNamespace              = "SVC_NAMESPACE"
+	EnvSupervisorClusterNamespaceToDelete      = "SVC_NAMESPACE_TO_DELETE"
+	EnvTopologyWithOnlyOneNode                 = "TOPOLOGY_WITH_ONLY_ONE_NODE"
+	EnvTopologyWithInvalidTagInvalidCat        = "TOPOLOGY_WITH_INVALID_TAG_INVALID_CAT"
+	EnvTopologyWithInvalidTagValidCat          = "TOPOLOGY_WITH_INVALID_TAG_VALID_CAT"
+	EnvNumberOfGoRoutines                      = "NUMBER_OF_GO_ROUTINES"
+	EnvWorkerPerRoutine                        = "WORKER_PER_ROUTINE"
+	EnvVmdkDiskURL                             = "DISK_URL_PATH"
+	EnvVmsvcVmImageName                        = "VMSVC_IMAGE_NAME"
+	EnvVolumeOperationsScale                   = "VOLUME_OPS_SCALE"
+	EnvComputeClusterName                      = "COMPUTE_CLUSTER_NAME"
+	EnvTKGImage                                = "TKG_IMAGE_NAME"
+	EnvVmknic4Vsan                             = "VMKNIC_FOR_VSAN"
+	ExecCommand                                = "/bin/df -T /mnt/volume1 | " +
 		"/bin/awk 'FNR == 2 {print $2}' > /mnt/volume1/fstype && while true ; do sleep 2 ; done"
-	execRWXCommandPod = "echo 'Hello message from Pod' > /mnt/volume1/Pod.html  && " +
+	ExecRWXCommandPod = "echo 'Hello message from Pod' > /mnt/volume1/Pod.html  && " +
 		"chmod o+rX /mnt /mnt/volume1/Pod.html && while true ; do sleep 2 ; done"
-	execRWXCommandPod1 = "echo 'Hello message from Pod1' > /mnt/volume1/Pod1.html  && " +
+	ExecRWXCommandPod1 = "echo 'Hello message from Pod1' > /mnt/volume1/Pod1.html  && " +
 		"chmod o+rX /mnt /mnt/volume1/Pod1.html && while true ; do sleep 2 ; done"
-	execRWXCommandPod2 = "echo 'Hello message from Pod2' > /mnt/volume1/Pod2.html  && " +
+	ExecRWXCommandPod2 = "echo 'Hello message from Pod2' > /mnt/volume1/Pod2.html  && " +
 		"chmod o+rX /mnt /mnt/volume1/Pod2.html && while true ; do sleep 2 ; done"
-	ext3FSType                                = "ext3"
-	ext4FSType                                = "ext4"
-	xfsFSType                                 = "xfs"
-	evacMModeType                             = "evacuateAllData"
-	fcdName                                   = "BasicStaticFCD"
-	fileSizeInMb                              = int64(2048)
-	filePathPod                               = "/mnt/volume1/Pod.html"
-	filePathPod1                              = "/mnt/volume1/Pod1.html"
-	filePathPod2                              = "/mnt/volume1/Pod2.html"
-	filePathFsType                            = "/mnt/volume1/fstype"
-	fullSyncFss                               = "trigger-csi-fullsync"
-	gcNodeUser                                = "vmware-system-user"
-	gcKubeConfigPath                          = "GC_KUBE_CONFIG"
-	gcSshKey                                  = "TEST-CLUSTER-SSH-KEY"
-	healthGreen                               = "green"
-	healthRed                                 = "red"
-	healthStatusAccessible                    = "accessible"
-	healthStatusInAccessible                  = "inaccessible"
-	healthStatusWaitTime                      = 3 * time.Minute
-	hostdServiceName                          = "hostd"
-	invalidFSType                             = "ext10"
-	k8sPodTerminationTimeOut                  = 7 * time.Minute
-	k8sPodTerminationTimeOutLong              = 10 * time.Minute
-	kcmManifest                               = "/etc/kubernetes/manifests/kube-controller-manager.yaml"
-	kubeAPIPath                               = "/etc/kubernetes/manifests/"
-	kubeAPIfile                               = "kube-apiserver.yaml"
-	kubeAPIRecoveryTime                       = 1 * time.Minute
-	kubeSystemNamespace                       = "kube-system"
-	kubeletConfigYaml                         = "/var/lib/kubelet/config.yaml"
-	nfs4FSType                                = "nfs4"
-	mmStateChangeTimeout                      = 300 // int
-	objOrItemNotFoundErr                      = "The object or item referred to could not be found"
-	passorwdFilePath                          = "/etc/vmware/wcp/.storageUser"
-	podContainerCreatingState                 = "ContainerCreating"
-	poll                                      = 2 * time.Second
-	pollTimeout                               = 10 * time.Minute
-	pollTimeoutShort                          = 1 * time.Minute
-	pollTimeoutSixMin                         = 6 * time.Minute
-	healthStatusPollTimeout                   = 20 * time.Minute
-	healthStatusPollInterval                  = 30 * time.Second
-	psodTime                                  = "120"
-	pvcHealthAnnotation                       = "volumehealth.storage.kubernetes.io/health"
-	pvcHealthTimestampAnnotation              = "volumehealth.storage.kubernetes.io/health-timestamp"
-	provisionerContainerName                  = "csi-provisioner"
-	quotaName                                 = "cns-test-quota"
-	regionKey                                 = "topology.csi.vmware.com/k8s-region"
-	resizePollInterval                        = 2 * time.Second
-	restartOperation                          = "restart"
-	rqLimit                                   = "200Gi"
-	rqLimitScaleTest                          = "900Gi"
-	rootUser                                  = "root"
-	defaultrqLimit                            = "20Gi"
-	rqStorageType                             = ".storageclass.storage.k8s.io/requests.storage"
-	resizerContainerName                      = "csi-resizer"
-	scParamDatastoreURL                       = "DatastoreURL"
-	scParamFsType                             = "csi.storage.k8s.io/fstype"
-	scParamStoragePolicyID                    = "storagePolicyID"
-	scParamStoragePolicyName                  = "StoragePolicyName"
-	shortProvisionerTimeout                   = "10"
-	snapshotapigroup                          = "snapshot.storage.k8s.io"
-	sleepTimeOut                              = 30
-	oneMinuteWaitTimeInSeconds                = 60
-	spsServiceName                            = "sps"
-	snapshotterContainerName                  = "csi-snapshotter"
-	sshdPort                                  = "22"
-	sshSecretName                             = "SSH_SECRET_NAME"
-	svcRunningMessage                         = "Running"
-	svcMasterIP                               = "SVC_MASTER_IP"
-	svcMasterPassword                         = "SVC_MASTER_PASSWORD"
-	startOperation                            = "start"
-	svcStoppedMessage                         = "Stopped"
-	stopOperation                             = "stop"
-	statusOperation                           = "status"
-	envZonalStoragePolicyName                 = "ZONAL_STORAGECLASS"
-	envZonalWffcStoragePolicyName             = "ZONAL_WFFC_STORAGECLASS"
-	supervisorClusterOperationsTimeout        = 3 * time.Minute
-	svClusterDistribution                     = "SupervisorCluster"
-	svOperationTimeout                        = 240 * time.Second
-	svStorageClassName                        = "SVStorageClass"
-	syncerContainerName                       = "vsphere-syncer"
-	totalResizeWaitPeriod                     = 10 * time.Minute
-	tkgClusterDistribution                    = "TKGService"
-	vanillaClusterDistribution                = "CSI-Vanilla"
-	vanillaClusterDistributionWithSpecialChar = "CSI-\tVanilla-#Test"
-	vcClusterAPI                              = "/api/vcenter/namespace-management/clusters"
-	vcRestSessionIdHeaderName                 = "vmware-api-session-Id"
-	vpxdServiceName                           = "vpxd"
-	vpxdReducedTaskTimeoutSecsInt             = 90
-	vSphereCSIControllerPodNamePrefix         = "vsphere-csi-controller"
-	vmUUIDLabel                               = "vmware-system-vm-uuid"
-	vsanLabel                                 = "vsan"
-	vsanDefaultStorageClassInSVC              = "vsan-default-storage-policy"
-	vsanDefaultStoragePolicyName              = "vSAN Default Storage Policy"
-	vsanHealthServiceWaitTime                 = 15
-	vsanhealthServiceName                     = "vsan-health"
-	vsphereCloudProviderConfiguration         = "vsphere-cloud-provider.conf"
-	vsphereControllerManager                  = "vmware-system-tkg-controller-manager"
-	vSphereCSIConf                            = "csi-vsphere.conf"
-	vsphereTKGSystemNamespace                 = "svc-tkg-domain-c10"
-	waitTimeForCNSNodeVMAttachmentReconciler  = 30 * time.Second
-	wcpServiceName                            = "wcp"
-	vmcWcpHost                                = "10.2.224.24" //This is the LB IP of VMC WCP and its constant
-	devopsTKG                                 = "test-cluster-e2e-script"
-	cloudadminTKG                             = "test-cluster-e2e-script-1"
-	vmOperatorAPI                             = "/apis/vmoperator.vmware.com/v1alpha1/"
-	devopsUser                                = "testuser"
-	zoneKey                                   = "topology.csi.vmware.com/k8s-zone"
-	tkgAPI                                    = "/apis/run.tanzu.vmware.com/v1alpha3/namespaces" +
+	Ext3FSType                                = "ext3"
+	Ext4FSType                                = "ext4"
+	XfsFSType                                 = "xfs"
+	EvacMModeType                             = "evacuateAllData"
+	FcdName                                   = "BasicStaticFCD"
+	FileSizeInMb                              = int64(2048)
+	FilePathPod                               = "/mnt/volume1/Pod.html"
+	FilePathPod1                              = "/mnt/volume1/Pod1.html"
+	FilePathPod2                              = "/mnt/volume1/Pod2.html"
+	FilePathFsType                            = "/mnt/volume1/fstype"
+	FullSyncFss                               = "trigger-csi-fullsync"
+	GcNodeUser                                = "vmware-system-user"
+	GcKubeConfigPath                          = "GC_KUBE_CONFIG"
+	GcSshKey                                  = "TEST-CLUSTER-SSH-KEY"
+	HealthGreen                               = "green"
+	HealthRed                                 = "red"
+	HealthStatusAccessible                    = "accessible"
+	HealthStatusInAccessible                  = "inaccessible"
+	HealthStatusWaitTime                      = 3 * time.Minute
+	HostdServiceName                          = "hostd"
+	InvalidFSType                             = "ext10"
+	K8sPodTerminationTimeOut                  = 7 * time.Minute
+	K8sPodTerminationTimeOutLong              = 10 * time.Minute
+	KcmManifest                               = "/etc/kubernetes/manifests/kube-controller-manager.yaml"
+	KubeAPIPath                               = "/etc/kubernetes/manifests/"
+	KubeAPIfile                               = "kube-apiserver.yaml"
+	KubeAPIRecoveryTime                       = 1 * time.Minute
+	KubeSystemNamespace                       = "kube-system"
+	KubeletConfigYaml                         = "/var/lib/kubelet/config.yaml"
+	Nfs4FSType                                = "nfs4"
+	MmStateChangeTimeout                      = 300 // int
+	ObjOrItemNotFoundErr                      = "The object or item referred to could not be found"
+	PassorwdFilePath                          = "/etc/vmware/wcp/.storageUser"
+	PodContainerCreatingState                 = "ContainerCreating"
+	Poll                                      = 2 * time.Second
+	PollTimeout                               = 10 * time.Minute
+	PollTimeoutShort                          = 1 * time.Minute
+	PollTimeoutSixMin                         = 6 * time.Minute
+	HealthStatusPollTimeout                   = 20 * time.Minute
+	HealthStatusPollInterval                  = 30 * time.Second
+	PsodTime                                  = "120"
+	PvcHealthAnnotation                       = "volumehealth.storage.kubernetes.io/health"
+	PvcHealthTimestampAnnotation              = "volumehealth.storage.kubernetes.io/health-timestamp"
+	ProvisionerContainerName                  = "csi-provisioner"
+	QuotaName                                 = "cns-test-quota"
+	RegionKey                                 = "topology.csi.vmware.com/k8s-region"
+	ResizePollInterval                        = 2 * time.Second
+	RestartOperation                          = "restart"
+	RqLimit                                   = "200Gi"
+	RqLimitScaleTest                          = "900Gi"
+	RootUser                                  = "root"
+	DefaultrqLimit                            = "20Gi"
+	RqStorageType                             = ".storageclass.storage.k8s.io/requests.storage"
+	ResizerContainerName                      = "csi-resizer"
+	ScParamDatastoreURL                       = "DatastoreURL"
+	ScParamFsType                             = "csi.storage.k8s.io/fstype"
+	ScParamStoragePolicyID                    = "storagePolicyID"
+	ScParamStoragePolicyName                  = "StoragePolicyName"
+	ShortProvisionerTimeout                   = "10"
+	Snapshotapigroup                          = "snapshot.storage.k8s.io"
+	SleepTimeOut                              = 30
+	OneMinuteWaitTimeInSeconds                = 60
+	SpsServiceName                            = "sps"
+	SnapshotterContainerName                  = "csi-snapshotter"
+	SshdPort                                  = "22"
+	SshSecretName                             = "SSH_SECRET_NAME"
+	SvcRunningMessage                         = "Running"
+	SvcMasterIP                               = "SVC_MASTER_IP"
+	SvcMasterPassword                         = "SVC_MASTER_PASSWORD"
+	StartOperation                            = "start"
+	SvcStoppedMessage                         = "Stopped"
+	StopOperation                             = "stop"
+	StatusOperation                           = "status"
+	EnvZonalStoragePolicyName                 = "ZONAL_STORAGECLASS"
+	EnvZonalWffcStoragePolicyName             = "ZONAL_WFFC_STORAGECLASS"
+	SupervisorClusterOperationsTimeout        = 3 * time.Minute
+	SvClusterDistribution                     = "SupervisorCluster"
+	SvOperationTimeout                        = 240 * time.Second
+	SvStorageClassName                        = "SVStorageClass"
+	SyncerContainerName                       = "vsphere-syncer"
+	TotalResizeWaitPeriod                     = 10 * time.Minute
+	TkgClusterDistribution                    = "TKGService"
+	VanillaClusterDistribution                = "CSI-Vanilla"
+	VanillaClusterDistributionWithSpecialChar = "CSI-\tVanilla-#Test"
+	VcClusterAPI                              = "/api/vcenter/namespace-management/clusters"
+	VcRestSessionIdHeaderName                 = "vmware-api-session-Id"
+	VpxdServiceName                           = "vpxd"
+	VpxdReducedTaskTimeoutSecsInt             = 90
+	VSphereCSIControllerPodNamePrefix         = "vsphere-csi-controller"
+	VmUUIDLabel                               = "vmware-system-vm-uuid"
+	VsanLabel                                 = "vsan"
+	VsanDefaultStorageClassInSVC              = "vsan-default-storage-policy"
+	VsanDefaultStoragePolicyName              = "vSAN Default Storage Policy"
+	VsanHealthServiceWaitTime                 = 15
+	VsanhealthServiceName                     = "vsan-health"
+	VsphereCloudProviderConfiguration         = "vsphere-cloud-provider.conf"
+	VsphereControllerManager                  = "vmware-system-tkg-controller-manager"
+	VSphereCSIConf                            = "csi-vsphere.conf"
+	VsphereTKGSystemNamespace                 = "svc-tkg-domain-c10"
+	WaitTimeForCNSNodeVMAttachmentReconciler  = 30 * time.Second
+	WcpServiceName                            = "wcp"
+	VmcWcpHost                                = "10.2.224.24" //This is the LB IP of VMC WCP and its constant
+	DevopsTKG                                 = "test-cluster-e2e-script"
+	CloudadminTKG                             = "test-cluster-e2e-script-1"
+	VmOperatorAPI                             = "/apis/vmoperator.vmware.com/v1alpha1/"
+	DevopsUser                                = "testuser"
+	ZoneKey                                   = "topology.csi.vmware.com/k8s-zone"
+	TkgAPI                                    = "/apis/run.tanzu.vmware.com/v1alpha3/namespaces" +
 		"/test-gc-e2e-demo-ns/tanzukubernetesclusters/"
-	topologykey                                = "topology.csi.vmware.com"
-	envTopologyMap                             = "TOPOLOGY_MAP"
-	topologyHaMap                              = "TOPOLOGY_HA_MAP"
-	topologyFeature                            = "TOPOLOGY_FEATURE"
-	topologyTkgHaName                          = "tkgs_ha"
-	tkgHATopologyKey                           = "topology.kubernetes.io"
-	tkgHAccessibleAnnotationKey                = "csi.vsphere.volume-accessible-topology"
-	tkgHARequestedAnnotationKey                = "csi.vsphere.volume-requested-topology"
-	datstoreSharedBetweenClusters              = "DATASTORE_SHARED_BETWEEN_TWO_CLUSTERS"
-	datastoreUrlSpecificToCluster              = "DATASTORE_URL_SPECIFIC_TO_CLUSTER"
-	storagePolicyForDatastoreSpecificToCluster = "STORAGE_POLICY_FOR_DATASTORE_SPECIFIC_TO_CLUSTER"
-	topologyCluster                            = "TOPOLOGY_CLUSTERS"
-	topologyLength                             = 5
-	tkgshaTopologyLevels                       = 1
-	vmClassBestEffortSmall                     = "best-effort-small"
-	vmcPrdEndpoint                             = "https://vmc.vmware.com/vmc/api/orgs/"
-	vsphereClusterIdConfigMapName              = "vsphere-csi-cluster-id"
-	authAPI                                    = "https://console.cloud.vmware.com/csp/gateway/am/api/auth" +
+	Topologykey                                = "topology.csi.vmware.com"
+	EnvTopologyMap                             = "TOPOLOGY_MAP"
+	TopologyHaMap                              = "TOPOLOGY_HA_MAP"
+	TopologyFeature                            = "TOPOLOGY_FEATURE"
+	TopologyTkgHaName                          = "tkgs_ha"
+	TkgHATopologyKey                           = "topology.kubernetes.io"
+	TkgHAccessibleAnnotationKey                = "csi.vsphere.volume-accessible-topology"
+	TkgHARequestedAnnotationKey                = "csi.vsphere.volume-requested-topology"
+	DatstoreSharedBetweenClusters              = "DATASTORE_SHARED_BETWEEN_TWO_CLUSTERS"
+	DatastoreUrlSpecificToCluster              = "DATASTORE_URL_SPECIFIC_TO_CLUSTER"
+	StoragePolicyForDatastoreSpecificToCluster = "STORAGE_POLICY_FOR_DATASTORE_SPECIFIC_TO_CLUSTER"
+	TopologyCluster                            = "TOPOLOGY_CLUSTERS"
+	TopologyLength                             = 5
+	TkgshaTopologyLevels                       = 1
+	VmClassBestEffortSmall                     = "best-effort-small"
+	VmcPrdEndpoint                             = "https://vmc.vmware.com/vmc/api/orgs/"
+	VsphereClusterIdConfigMapName              = "vsphere-csi-cluster-id"
+	AuthAPI                                    = "https://console.cloud.vmware.com/csp/gateway/am/api/auth" +
 		"/api-tokens/authorize"
-	storagePolicyQuota                       = "-storagepolicyquota"
-	podVMOnStretchedSupervisor               = "stretched-svc"
-	stretchedSVCTopologyLevels               = 1
-	envZonalStoragePolicyName2               = "ZONAL2_STORAGECLASS"
-	volExtensionName                         = "volume.cns.vsphere.vmware.com"
-	snapshotExtensionName                    = "snapshot.cns.vsphere.vmware.com"
-	vmServiceExtensionName                   = "vmservice.cns.vsphere.vmware.com"
-	pvcUsage                                 = "-pvc-usage"
-	snapshotUsage                            = "-snapshot-usage"
-	vmUsage                                  = "-vm-usage"
-	diskSize1Gi                              = int64(1024)
-	storageQuotaWebhookPrefix                = "storage-quota-webhook"
-	envStoragePolicyNameForVsanNfsDatastores = "STORAGE_POLICY_FOR_VSAN_NFS_DATASTORES"
-	devopsKubeConf                           = "DEV_OPS_USER_KUBECONFIG"
-	quotaSupportedVCVersion                  = "9.0.0"
+	StoragePolicyQuota                       = "-storagepolicyquota"
+	PodVMOnStretchedSupervisor               = "stretched-svc"
+	StretchedSVCTopologyLevels               = 1
+	EnvZonalStoragePolicyName2               = "ZONAL2_STORAGECLASS"
+	VolExtensionName                         = "volume.cns.vsphere.vmware.com"
+	SnapshotExtensionName                    = "snapshot.cns.vsphere.vmware.com"
+	VmServiceExtensionName                   = "vmservice.cns.vsphere.vmware.com"
+	PvcUsage                                 = "-pvc-usage"
+	SnapshotUsage                            = "-snapshot-usage"
+	VmUsage                                  = "-vm-usage"
+	DiskSize1Gi                              = int64(1024)
+	StorageQuotaWebhookPrefix                = "storage-quota-webhook"
+	EnvStoragePolicyNameForVsanNfsDatastores = "STORAGE_POLICY_FOR_VSAN_NFS_DATASTORES"
+	DevopsKubeConf                           = "DEV_OPS_USER_KUBECONFIG"
+	QuotaSupportedVCVersion                  = "9.0.0"
 )
 
 /*
@@ -302,201 +301,201 @@ vmServiceVm -> vmService VM related testcases
 wldi -> Work-Load Domain Isolation testcases
 */
 const (
-	flaky                 = "flaky"
-	disruptive            = "disruptive"
-	wcp                   = "wcp"
-	tkg                   = "tkg"
-	vanilla               = "vanilla"
-	preferential          = "preferential"
-	vsphereConfigSecret   = "vsphereConfigSecret"
-	snapshot              = "snapshot"
-	stable                = "stable"
-	newTest               = "newTest"
-	multiVc               = "multiVc"
-	block                 = "block"
-	file                  = "file"
-	core                  = "core"
-	hci                   = "hci"
-	p0                    = "p0"
-	p1                    = "p1"
-	p2                    = "p2"
-	vsanStretch           = "vsanStretch"
-	longRunning           = "longRunning"
-	deprecated            = "deprecated"
-	vmc                   = "vmc"
-	tkgsHA                = "tkgsHA"
-	thickThin             = "thickThin"
-	customPort            = "customPort"
-	windows               = "windows"
-	semiAutomated         = "semiAutomated"
-	level2                = "level2"
-	level5                = "level5"
-	negative              = "negative"
-	listVolume            = "listVolume"
-	multiSvc              = "multiSvc"
-	primaryCentric        = "primaryCentric"
-	controlPlaneOnPrimary = "controlPlaneOnPrimary"
-	distributed           = "distributed"
-	vmsvc                 = "vmsvc"
-	vc90                  = "vc90"
-	vc80                  = "vc80"
-	vc70                  = "vc70"
-	wldi                  = "wldi"
-	vmServiceVm           = "vmServiceVm"
-	vcptocsiTest          = "vcptocsiTest"
-	stretchedSvc          = "stretchedSvc"
-	devops                = "devops"
+	Flaky                 = "flaky"
+	Disruptive            = "disruptive"
+	Wcp                   = "wcp"
+	Tkg                   = "tkg"
+	Vanilla               = "vanilla"
+	Preferential          = "preferential"
+	VsphereConfigSecret   = "vsphereConfigSecret"
+	Snapshot              = "snapshot"
+	Stable                = "stable"
+	NewTest               = "newTest"
+	MultiVc               = "multiVc"
+	Block                 = "block"
+	File                  = "file"
+	Core                  = "core"
+	Hci                   = "hci"
+	P0                    = "p0"
+	P1                    = "p1"
+	P2                    = "p2"
+	VsanStretch           = "vsanStretch"
+	LongRunning           = "longRunning"
+	Deprecated            = "deprecated"
+	Vmc                   = "vmc"
+	TkgsHA                = "tkgsHA"
+	ThickThin             = "thickThin"
+	CustomPort            = "customPort"
+	Windows               = "windows"
+	SemiAutomated         = "semiAutomated"
+	Level2                = "level2"
+	Level5                = "level5"
+	Negative              = "negative"
+	ListVolume            = "listVolume"
+	MultiSvc              = "multiSvc"
+	PrimaryCentric        = "primaryCentric"
+	ControlPlaneOnPrimary = "controlPlaneOnPrimary"
+	Distributed           = "distributed"
+	Vmsvc                 = "vmsvc"
+	Vc90                  = "vc90"
+	Vc80                  = "vc80"
+	Vc70                  = "vc70"
+	Wldi                  = "wldi"
+	VmServiceVm           = "vmServiceVm"
+	VcptocsiTest          = "vcptocsiTest"
+	StretchedSvc          = "stretchedSvc"
+	Devops                = "devops"
 )
 
 // The following variables are required to know cluster type to run common e2e
 // tests. These variables will be set once during test suites initialization.
 var (
-	vanillaCluster       bool
-	supervisorCluster    bool
-	guestCluster         bool
-	rwxAccessMode        bool
-	wcpVsanDirectCluster bool
-	vcptocsi             bool
-	windowsEnv           bool
-	multipleSvc          bool
-	multivc              bool
-	stretchedSVC         bool
+	VanillaCluster       bool
+	SupervisorCluster    bool
+	GuestCluster         bool
+	RwxAccessMode        bool
+	WcpVsanDirectCluster bool
+	Vcptocsi             bool
+	WindowsEnv           bool
+	MultipleSvc          bool
+	Multivc              bool
+	StretchedSVC         bool
 )
 
 // For busybox pod image
 var (
-	busyBoxImageOnGcr = "busybox"
+	BusyBoxImageOnGcr = "busybox"
 )
 
 // For VCP to CSI migration tests.
 var (
-	envSharedDatastoreName          = "SHARED_VSPHERE_DATASTORE_NAME"
-	vcpProvisionerName              = "kubernetes.io/vsphere-volume"
-	vcpScParamDatastoreName         = "datastore"
-	vcpScParamPolicyName            = "storagePolicyName"
-	vcpScParamFstype                = "fstype"
-	migratedToAnnotation            = "pv.kubernetes.io/migrated-to"
-	migratedPluginAnnotation        = "storage.alpha.kubernetes.io/migrated-plugins"
-	pvcAnnotationStorageProvisioner = "volume.beta.kubernetes.io/storage-provisioner"
-	pvAnnotationProvisionedBy       = "pv.kubernetes.io/provisioned-by"
+	EnvSharedDatastoreName          = "SHARED_VSPHERE_DATASTORE_NAME"
+	VcpProvisionerName              = "kubernetes.io/vsphere-volume"
+	VcpScParamDatastoreName         = "datastore"
+	VcpScParamPolicyName            = "storagePolicyName"
+	VcpScParamFstype                = "fstype"
+	MigratedToAnnotation            = "pv.kubernetes.io/migrated-to"
+	MigratedPluginAnnotation        = "storage.alpha.kubernetes.io/migrated-plugins"
+	PvcAnnotationStorageProvisioner = "volume.beta.kubernetes.io/storage-provisioner"
+	PvAnnotationProvisionedBy       = "pv.kubernetes.io/provisioned-by"
 	nodeMapper                      = &NodeMapper{}
 )
 
 // For vsan stretched cluster tests
 var (
-	envTestbedInfoJsonPath = "TESTBEDINFO_JSON"
+	EnvTestbedInfoJsonPath = "TESTBEDINFO_JSON"
 )
 
 // Config secret testuser credentials
 var (
-	configSecretTestUser1Password = "VMware!23"
-	configSecretTestUser2Password = "VMware!234"
-	configSecretTestUser1         = "testuser1"
-	configSecretTestUser2         = "testuser2"
+	ConfigSecretTestUser1Password = "VMware!23"
+	ConfigSecretTestUser2Password = "VMware!234"
+	ConfigSecretTestUser1         = "testuser1"
+	ConfigSecretTestUser2         = "testuser2"
 )
 
 // Nimbus generated passwords
 var (
-	nimbusK8sVmPwd = "NIMBUS_K8S_VM_PWD"
-	nimbusEsxPwd   = "ESX_PWD"
-	nimbusVcPwd    = "VC_PWD"
-	vcUIPwd        = "VC_ADMIN_PWD"
+	NimbusK8sVmPwd = "NIMBUS_K8S_VM_PWD"
+	NimbusEsxPwd   = "ESX_PWD"
+	NimbusVcPwd    = "VC_PWD"
+	VcUIPwd        = "VC_ADMIN_PWD"
 )
 
 // volume allocation types for cns volumes
 var (
-	thinAllocType = "Conserve space when possible"
-	eztAllocType  = "Fully initialized"
-	lztAllocType  = "Reserve space"
+	ThinAllocType = "Conserve space when possible"
+	EztAllocType  = "Fully initialized"
+	LztAllocType  = "Reserve space"
 )
 
 // For Preferential datatsore
 var (
-	preferredDatastoreRefreshTimeInterval = 1
-	preferredDatastoreTimeOutInterval     = 1 * time.Minute
-	preferredDSCat                        = "cns.vmware.topology-preferred-datastores"
-	preferredTagDesc                      = "preferred datastore tag"
-	nfsStoragePolicyName                  = "NFS_STORAGE_POLICY_NAME"
-	nfstoragePolicyDatastoreUrl           = "NFS_STORAGE_POLICY_DATASTORE_URL"
-	workerClusterMap                      = "WORKER_CLUSTER_MAP"
-	datastoreClusterMap                   = "DATASTORE_CLUSTER_MAP"
+	PreferredDatastoreRefreshTimeInterval = 1
+	PreferredDatastoreTimeOutInterval     = 1 * time.Minute
+	PreferredDSCat                        = "cns.vmware.topology-preferred-datastores"
+	PreferredTagDesc                      = "preferred datastore tag"
+	NfsStoragePolicyName                  = "NFS_STORAGE_POLICY_NAME"
+	NfstoragePolicyDatastoreUrl           = "NFS_STORAGE_POLICY_DATASTORE_URL"
+	WorkerClusterMap                      = "WORKER_CLUSTER_MAP"
+	DatastoreClusterMap                   = "DATASTORE_CLUSTER_MAP"
 )
 
 // For multivc
 var (
-	envSharedDatastoreURLVC1          = "SHARED_VSPHERE_DATASTORE_URL_VC1"
-	envSharedDatastoreURLVC2          = "SHARED_VSPHERE_DATASTORE_URL_VC2"
-	envStoragePolicyNameToDeleteLater = "STORAGE_POLICY_TO_DELETE_LATER"
-	envMultiVCSetupType               = "MULTI_VC_SETUP_TYPE"
-	envStoragePolicyNameVC1           = "STORAGE_POLICY_VC1"
-	envStoragePolicyNameInVC1VC2      = "STORAGE_POLICY_NAME_COMMON_IN_VC1_VC2"
-	envPreferredDatastoreUrlVC1       = "PREFERRED_DATASTORE_URL_VC1"
-	envPreferredDatastoreUrlVC2       = "PREFERRED_DATASTORE_URL_VC2"
-	envTestbedInfoJsonPathVC1         = "TESTBEDINFO_JSON_VC1"
-	envTestbedInfoJsonPathVC2         = "TESTBEDINFO_JSON_VC2"
-	envTestbedInfoJsonPathVC3         = "TESTBEDINFO_JSON_VC3"
+	EnvSharedDatastoreURLVC1          = "SHARED_VSPHERE_DATASTORE_URL_VC1"
+	EnvSharedDatastoreURLVC2          = "SHARED_VSPHERE_DATASTORE_URL_VC2"
+	EnvStoragePolicyNameToDeleteLater = "STORAGE_POLICY_TO_DELETE_LATER"
+	EnvMultiVCSetupType               = "MULTI_VC_SETUP_TYPE"
+	EnvStoragePolicyNameVC1           = "STORAGE_POLICY_VC1"
+	EnvStoragePolicyNameInVC1VC2      = "STORAGE_POLICY_NAME_COMMON_IN_VC1_VC2"
+	EnvPreferredDatastoreUrlVC1       = "PREFERRED_DATASTORE_URL_VC1"
+	EnvPreferredDatastoreUrlVC2       = "PREFERRED_DATASTORE_URL_VC2"
+	EnvTestbedInfoJsonPathVC1         = "TESTBEDINFO_JSON_VC1"
+	EnvTestbedInfoJsonPathVC2         = "TESTBEDINFO_JSON_VC2"
+	EnvTestbedInfoJsonPathVC3         = "TESTBEDINFO_JSON_VC3"
 )
 
 // VolumeSnapshotClass env variables for tkg-snapshot
 var (
-	envVolSnapClassDel = "VOLUME_SNAPSHOT_CLASS_DELETE"
-	deletionPolicy     = "Delete"
+	EnvVolSnapClassDel = "VOLUME_SNAPSHOT_CLASS_DELETE"
+	DeletionPolicy     = "Delete"
 )
 
 // windows env variables
 var (
-	envWindowsUser    = "WINDOWS_USER"
-	envWindowsPwd     = "WINDOWS_PWD"
-	invalidNtfsFSType = "NtFs1"
-	ntfsFSType        = "NTFS"
-	windowsImageOnMcr = "servercore"
-	windowsExecCmd    = "while (1) " +
+	EnvWindowsUser    = "WINDOWS_USER"
+	EnvWindowsPwd     = "WINDOWS_PWD"
+	InvalidNtfsFSType = "NtFs1"
+	NtfsFSType        = "NTFS"
+	WindowsImageOnMcr = "servercore"
+	WindowsExecCmd    = "while (1) " +
 		" { Add-Content -Encoding Ascii /mnt/volume1/fstype.txt $([System.IO.DriveInfo]::getdrives() " +
 		"| Where-Object {$_.DriveType -match 'Fixed'} | Select-Object -Property DriveFormat); sleep 1 }"
-	windowsExecRWXCommandPod = "while (1) " +
+	WindowsExecRWXCommandPod = "while (1) " +
 		" { Add-Content /mnt/volume1/Pod.html 'Hello message from Pod'; sleep 1 }"
-	windowsExecRWXCommandPod1 = "while (1) " +
+	WindowsExecRWXCommandPod1 = "while (1) " +
 		" { Add-Content /mnt/volume1/Pod1.html 'Hello message from Pod1'; sleep 1 }"
 )
 
 // multiSvc env variables
 var (
-	vcSessionWaitTime                   = 5 * time.Minute
-	envStoragePolicyNameForSharedDsSvc1 = "STORAGE_POLICY_FOR_SHARED_DATASTORES_SVC1"
-	envStoragePolicyNameForSharedDsSvc2 = "STORAGE_POLICY_FOR_SHARED_DATASTORES_SVC2"
-	envSupervisorClusterNamespace1      = "SVC_NAMESPACE1"
-	envNfsDatastoreName                 = "NFS_DATASTORE_NAME"
-	envNfsDatastoreIP                   = "NFS_DATASTORE_IP"
-	pwdRotationTimeout                  = 10 * time.Minute
-	roleCnsDatastore                    = "CNS-SUPERVISOR-DATASTORE"
-	roleCnsSearchAndSpbm                = "CNS-SUPERVISOR-SEARCH-AND-SPBM"
-	roleCnsHostConfigStorageAndCnsVm    = "CNS-SUPERVISOR-HOST-CONFIG-STORAGE-AND-CNS-VM"
+	VcSessionWaitTime                   = 5 * time.Minute
+	EnvStoragePolicyNameForSharedDsSvc1 = "STORAGE_POLICY_FOR_SHARED_DATASTORES_SVC1"
+	EnvStoragePolicyNameForSharedDsSvc2 = "STORAGE_POLICY_FOR_SHARED_DATASTORES_SVC2"
+	EnvSupervisorClusterNamespace1      = "SVC_NAMESPACE1"
+	EnvNfsDatastoreName                 = "NFS_DATASTORE_NAME"
+	EnvNfsDatastoreIP                   = "NFS_DATASTORE_IP"
+	PwdRotationTimeout                  = 10 * time.Minute
+	RoleCnsDatastore                    = "CNS-SUPERVISOR-DATASTORE"
+	RoleCnsSearchAndSpbm                = "CNS-SUPERVISOR-SEARCH-AND-SPBM"
+	RoleCnsHostConfigStorageAndCnsVm    = "CNS-SUPERVISOR-HOST-CONFIG-STORAGE-AND-CNS-VM"
 )
 
 // For rwx
 var (
-	envVsanDsStoragePolicyCluster1 = "VSAN_DATASTORE_CLUSTER1_STORAGE_POLICY"
-	envVsanDsStoragePolicyCluster3 = "VSAN_DATASTORE_CLUSTER3_STORAGE_POLICY"
-	envNonVsanDsUrl                = "NON_VSAN_DATASTOREURL"
-	envVsanDsUrlCluster3           = "VSAN_DATASTOREURL_CLUSTER3"
-	envRemoteDatastoreUrl          = "REMOTE_DATASTORE_URL"
-	envTopologySetupType           = "TOPOLOGY_SETUP_TYPE"
+	EnvVsanDsStoragePolicyCluster1 = "VSAN_DATASTORE_CLUSTER1_STORAGE_POLICY"
+	EnvVsanDsStoragePolicyCluster3 = "VSAN_DATASTORE_CLUSTER3_STORAGE_POLICY"
+	EnvNonVsanDsUrl                = "NON_VSAN_DATASTOREURL"
+	EnvVsanDsUrlCluster3           = "VSAN_DATASTOREURL_CLUSTER3"
+	EnvRemoteDatastoreUrl          = "REMOTE_DATASTORE_URL"
+	EnvTopologySetupType           = "TOPOLOGY_SETUP_TYPE"
 )
 
 // For management workload domain isolation
 var (
-	envZonal2StoragePolicyName            = "ZONAL2_STORAGE_POLICY_IMM"
-	envZonal2StoragePolicyNameLateBidning = "ZONAL2_STORAGE_POLICY_WFFC"
-	envZonal1StoragePolicyName            = "ZONAL1_STORAGE_POLICY_IMM"
-	envZonal3StoragePolicyName            = "ZONAL3_STORAGE_POLICY_IMM"
-	topologyDomainIsolation               = "Workload_Management_Isolation"
-	envIsolationSharedStoragePolicyName   = "WORKLOAD_ISOLATION_SHARED_STORAGE_POLICY"
-	envSharedZone2Zone4StoragePolicyName  = "SHARED_ZONE2_ZONE4_STORAGE_POLICY_IMM"
-	envSharedZone2Zone4DatastoreUrl       = "SHARED_ZONE2_ZONE4_DATASTORE_URL"
+	EnvZonal2StoragePolicyName            = "ZONAL2_STORAGE_POLICY_IMM"
+	EnvZonal2StoragePolicyNameLateBidning = "ZONAL2_STORAGE_POLICY_WFFC"
+	EnvZonal1StoragePolicyName            = "ZONAL1_STORAGE_POLICY_IMM"
+	EnvZonal3StoragePolicyName            = "ZONAL3_STORAGE_POLICY_IMM"
+	TopologyDomainIsolation               = "Workload_Management_Isolation"
+	EnvIsolationSharedStoragePolicyName   = "WORKLOAD_ISOLATION_SHARED_STORAGE_POLICY"
+	EnvSharedZone2Zone4StoragePolicyName  = "SHARED_ZONE2_ZONE4_STORAGE_POLICY_IMM"
+	EnvSharedZone2Zone4DatastoreUrl       = "SHARED_ZONE2_ZONE4_DATASTORE_URL"
 )
 
 // storage policy usages for storage quota validation
-var usageSuffixes = []string{
+var UsageSuffixes = []string{
 	"-pvc-usage",
 	"-latebinding-pvc-usage",
 	"-snapshot-usage",
@@ -506,8 +505,8 @@ var usageSuffixes = []string{
 }
 
 const (
-	storagePolicyUsagePollInterval = 10 * time.Second
-	storagePolicyUsagePollTimeout  = 1 * time.Minute
+	StoragePolicyUsagePollInterval = 10 * time.Second
+	StoragePolicyUsagePollTimeout  = 1 * time.Minute
 )
 
 // GetAndExpectEnvVar returns the value of an environment variable or fails the regression if it's not set.
@@ -572,7 +571,7 @@ a warning if the variable is not set.
 func GetorIgnoreStringEnvVar(varName string) string {
 	varValue, exists := os.LookupEnv(varName)
 	if !exists {
-		missingEnvVars = append(missingEnvVars, varName)
+		MissingEnvVars = append(MissingEnvVars, varName)
 	}
 	return varValue
 }
@@ -581,125 +580,125 @@ func GetorIgnoreStringEnvVar(varName string) string {
 func setClusterFlavor(clusterFlavor cnstypes.CnsClusterFlavor) {
 	switch clusterFlavor {
 	case cnstypes.CnsClusterFlavorWorkload:
-		supervisorCluster = true
+		SupervisorCluster = true
 	case cnstypes.CnsClusterFlavorGuest:
-		guestCluster = true
+		GuestCluster = true
 	default:
-		vanillaCluster = true
+		VanillaCluster = true
 	}
 
 	// Check if the access mode is set for File volume setups
 	kind := os.Getenv("ACCESS_MODE")
 	if strings.TrimSpace(string(kind)) == "RWX" {
-		rwxAccessMode = true
+		RwxAccessMode = true
 	}
 
 	// Check if its the vcptocsi tesbed
 	mode := os.Getenv("VCPTOCSI")
 	if strings.TrimSpace(string(mode)) == "1" {
-		vcptocsi = true
+		Vcptocsi = true
 	}
 	//Check if its windows env
 	workerNode := os.Getenv("WORKER_TYPE")
 	if strings.TrimSpace(string(workerNode)) == "WINDOWS" {
-		windowsEnv = true
+		WindowsEnv = true
 	}
 
 	// Check if it's multiple supervisor cluster setup
 	svcType := os.Getenv("SUPERVISOR_TYPE")
 	if strings.TrimSpace(string(svcType)) == "MULTI_SVC" {
-		multipleSvc = true
+		MultipleSvc = true
 	}
 
 	//Check if it is multivc env
 	topologyType := os.Getenv("TOPOLOGY_TYPE")
 	if strings.TrimSpace(string(topologyType)) == "MULTI_VC" {
-		multivc = true
+		Multivc = true
 	}
 
 	//Check if its stretched SVC testbed
 	testbedType := os.Getenv("STRETCHED_SVC")
 	if strings.TrimSpace(string(testbedType)) == "1" {
-		stretchedSVC = true
+		StretchedSVC = true
 	}
 }
 
 var (
 	// reading port numbers for VC, Master VM and ESXi from export variables
-	envVc1SshdPortNum       = "VC1_SSHD_PORT_NUM"
-	envVc2SshdPortNum       = "VC2_SSHD_PORT_NUM"
-	envVc3SshdPortNum       = "VC3_SSHD_PORT_NUM"
-	envMasterIP1SshdPortNum = "MASTER_IP1_SSHD_PORT_NUM"
-	envMasterIP2SshdPortNum = "MASTER_IP2_SSHD_PORT_NUM"
-	envMasterIP3SshdPortNum = "MASTER_IP3_SSHD_PORT_NUM"
-	envEsx1PortNum          = "ESX1_SSHD_PORT_NUM"
-	envEsx2PortNum          = "ESX2_SSHD_PORT_NUM"
-	envEsx3PortNum          = "ESX3_SSHD_PORT_NUM"
-	envEsx4PortNum          = "ESX4_SSHD_PORT_NUM"
-	envEsx5PortNum          = "ESX5_SSHD_PORT_NUM"
-	envEsx6PortNum          = "ESX6_SSHD_PORT_NUM"
-	envEsx7PortNum          = "ESX7_SSHD_PORT_NUM"
-	envEsx8PortNum          = "ESX8_SSHD_PORT_NUM"
-	envEsx9PortNum          = "ESX9_SSHD_PORT_NUM"
-	envEsx10PortNum         = "ESX10_SSHD_PORT_NUM"
+	EnvVc1SshdPortNum       = "VC1_SSHD_PORT_NUM"
+	EnvVc2SshdPortNum       = "VC2_SSHD_PORT_NUM"
+	EnvVc3SshdPortNum       = "VC3_SSHD_PORT_NUM"
+	EnvMasterIP1SshdPortNum = "MASTER_IP1_SSHD_PORT_NUM"
+	EnvMasterIP2SshdPortNum = "MASTER_IP2_SSHD_PORT_NUM"
+	EnvMasterIP3SshdPortNum = "MASTER_IP3_SSHD_PORT_NUM"
+	EnvEsx1PortNum          = "ESX1_SSHD_PORT_NUM"
+	EnvEsx2PortNum          = "ESX2_SSHD_PORT_NUM"
+	EnvEsx3PortNum          = "ESX3_SSHD_PORT_NUM"
+	EnvEsx4PortNum          = "ESX4_SSHD_PORT_NUM"
+	EnvEsx5PortNum          = "ESX5_SSHD_PORT_NUM"
+	EnvEsx6PortNum          = "ESX6_SSHD_PORT_NUM"
+	EnvEsx7PortNum          = "ESX7_SSHD_PORT_NUM"
+	EnvEsx8PortNum          = "ESX8_SSHD_PORT_NUM"
+	EnvEsx9PortNum          = "ESX9_SSHD_PORT_NUM"
+	EnvEsx10PortNum         = "ESX10_SSHD_PORT_NUM"
 
 	// reading IPs for VC, Master VM and ESXi from export variables
-	envVcIP1     = "VC_IP1"
-	envVcIP2     = "VC_IP2"
-	envVcIP3     = "VC_IP3"
-	envMasterIP1 = "MASTER_IP1"
-	envMasterIP2 = "MASTER_IP2"
-	envMasterIP3 = "MASTER_IP3"
-	envEsxIp1    = "ESX1_IP"
-	envEsxIp2    = "ESX2_IP"
-	envEsxIp3    = "ESX3_IP"
-	envEsxIp4    = "ESX4_IP"
-	envEsxIp5    = "ESX5_IP"
-	envEsxIp6    = "ESX6_IP"
-	envEsxIp7    = "ESX7_IP"
-	envEsxIp8    = "ESX8_IP"
-	envEsxIp9    = "ESX9_IP"
-	envEsxIp10   = "ESX10_IP"
+	EnvVcIP1     = "VC_IP1"
+	EnvVcIP2     = "VC_IP2"
+	EnvVcIP3     = "VC_IP3"
+	EnvMasterIP1 = "MASTER_IP1"
+	EnvMasterIP2 = "MASTER_IP2"
+	EnvMasterIP3 = "MASTER_IP3"
+	EnvEsxIp1    = "ESX1_IP"
+	EnvEsxIp2    = "ESX2_IP"
+	EnvEsxIp3    = "ESX3_IP"
+	EnvEsxIp4    = "ESX4_IP"
+	EnvEsxIp5    = "ESX5_IP"
+	EnvEsxIp6    = "ESX6_IP"
+	EnvEsxIp7    = "ESX7_IP"
+	EnvEsxIp8    = "ESX8_IP"
+	EnvEsxIp9    = "ESX9_IP"
+	EnvEsxIp10   = "ESX10_IP"
 
 	// default port declaration for each IP
-	vcIp1SshPortNum       = sshdPort
-	vcIp2SshPortNum       = sshdPort
-	vcIp3SshPortNum       = sshdPort
-	esxIp1PortNum         = sshdPort
-	esxIp2PortNum         = sshdPort
-	esxIp3PortNum         = sshdPort
-	esxIp4PortNum         = sshdPort
-	esxIp5PortNum         = sshdPort
-	esxIp6PortNum         = sshdPort
-	esxIp7PortNum         = sshdPort
-	esxIp8PortNum         = sshdPort
-	esxIp9PortNum         = sshdPort
-	esxIp10PortNum        = sshdPort
-	k8sMasterIp1PortNum   = sshdPort
-	k8sMasterIp2PortNum   = sshdPort
-	k8sMasterIp3PortNum   = sshdPort
-	defaultVcAdminPortNum = "443"
+	VcIp1SshPortNum       = SshdPort
+	VcIp2SshPortNum       = SshdPort
+	VcIp3SshPortNum       = SshdPort
+	EsxIp1PortNum         = SshdPort
+	EsxIp2PortNum         = SshdPort
+	EsxIp3PortNum         = SshdPort
+	EsxIp4PortNum         = SshdPort
+	EsxIp5PortNum         = SshdPort
+	EsxIp6PortNum         = SshdPort
+	EsxIp7PortNum         = SshdPort
+	EsxIp8PortNum         = SshdPort
+	EsxIp9PortNum         = SshdPort
+	EsxIp10PortNum        = SshdPort
+	K8sMasterIp1PortNum   = SshdPort
+	K8sMasterIp2PortNum   = SshdPort
+	K8sMasterIp3PortNum   = SshdPort
+	DefaultVcAdminPortNum = "443"
 
 	// global variables declared
-	esxIp1             = ""
-	esxIp2             = ""
-	esxIp3             = ""
-	esxIp4             = ""
-	esxIp5             = ""
-	esxIp6             = ""
-	esxIp7             = ""
-	esxIp8             = ""
-	esxIp9             = ""
-	esxIp10            = ""
-	vcAddress          = ""
-	vcAddress2         = ""
-	vcAddress3         = ""
-	masterIP1          = ""
-	masterIP2          = ""
-	masterIP3          = ""
-	ipPortMap          = make(map[string]string)
-	missingEnvVars     []string
-	defaultlocalhostIP = "127.0.0.1"
+	EsxIp1             = ""
+	EsxIp2             = ""
+	EsxIp3             = ""
+	EsxIp4             = ""
+	EsxIp5             = ""
+	EsxIp6             = ""
+	EsxIp7             = ""
+	EsxIp8             = ""
+	EsxIp9             = ""
+	EsxIp10            = ""
+	VcAddress          = ""
+	VcAddress2         = ""
+	VcAddress3         = ""
+	MasterIP1          = ""
+	MasterIP2          = ""
+	MasterIP3          = ""
+	IpPortMap          = make(map[string]string)
+	MissingEnvVars     []string
+	DefaultlocalhostIP = "127.0.0.1"
 )
 
 /*
@@ -709,80 +708,80 @@ It sets up SSH access to vCenter servers, ESXi hosts, and Kubernetes masters bas
 */
 func safeInsertToMap(key, value string) {
 	if key != "" && value != "" {
-		ipPortMap[key] = value
+		IpPortMap[key] = value
 	}
 }
 
 func setSShdPort() {
-	vcAddress = GetAndExpectEnvVar(envVcIP1)
+	VcAddress = GetAndExpectEnvVar(EnvVcIP1)
 	isPrivateNetwork := GetBoolEnvVarOrDefault("IS_PRIVATE_NETWORK", false)
 
-	if multivc {
-		vcAddress2 = GetAndExpectEnvVar(envVcIP2)
-		vcAddress3 = GetAndExpectEnvVar(envVcIP3)
+	if Multivc {
+		VcAddress2 = GetAndExpectEnvVar(EnvVcIP2)
+		VcAddress3 = GetAndExpectEnvVar(EnvVcIP3)
 	}
 
 	if isPrivateNetwork {
-		if multivc {
-			vcIp2SshPortNum = GetorIgnoreStringEnvVar(envVc2SshdPortNum)
-			vcIp3SshPortNum = GetorIgnoreStringEnvVar(envVc3SshdPortNum)
+		if Multivc {
+			VcIp2SshPortNum = GetorIgnoreStringEnvVar(EnvVc2SshdPortNum)
+			VcIp3SshPortNum = GetorIgnoreStringEnvVar(EnvVc3SshdPortNum)
 
-			safeInsertToMap(vcAddress2, vcIp2SshPortNum)
-			safeInsertToMap(vcAddress3, vcIp3SshPortNum)
+			safeInsertToMap(VcAddress2, VcIp2SshPortNum)
+			safeInsertToMap(VcAddress3, VcIp3SshPortNum)
 		}
 
 		// reading masterIP and its port number
-		masterIP1 = GetorIgnoreStringEnvVar(envMasterIP1)
-		masterIP2 = GetorIgnoreStringEnvVar(envMasterIP2)
-		masterIP3 = GetorIgnoreStringEnvVar(envMasterIP3)
-		k8sMasterIp1PortNum = GetorIgnoreStringEnvVar(envMasterIP1SshdPortNum)
-		k8sMasterIp2PortNum = GetorIgnoreStringEnvVar(envMasterIP2SshdPortNum)
-		k8sMasterIp3PortNum = GetorIgnoreStringEnvVar(envMasterIP3SshdPortNum)
+		MasterIP1 = GetorIgnoreStringEnvVar(EnvMasterIP1)
+		MasterIP2 = GetorIgnoreStringEnvVar(EnvMasterIP2)
+		MasterIP3 = GetorIgnoreStringEnvVar(EnvMasterIP3)
+		K8sMasterIp1PortNum = GetorIgnoreStringEnvVar(EnvMasterIP1SshdPortNum)
+		K8sMasterIp2PortNum = GetorIgnoreStringEnvVar(EnvMasterIP2SshdPortNum)
+		K8sMasterIp3PortNum = GetorIgnoreStringEnvVar(EnvMasterIP3SshdPortNum)
 
-		vcIp1SshPortNum = GetorIgnoreStringEnvVar(envVc1SshdPortNum)
+		VcIp1SshPortNum = GetorIgnoreStringEnvVar(EnvVc1SshdPortNum)
 
 		// reading esxi ip and its port
-		esxIp1 = GetorIgnoreStringEnvVar(envEsxIp1)
-		esxIp1PortNum = GetorIgnoreStringEnvVar(envEsx1PortNum)
-		esxIp2PortNum = GetorIgnoreStringEnvVar(envEsx2PortNum)
-		esxIp3PortNum = GetorIgnoreStringEnvVar(envEsx3PortNum)
-		esxIp4PortNum = GetorIgnoreStringEnvVar(envEsx4PortNum)
-		esxIp5PortNum = GetorIgnoreStringEnvVar(envEsx5PortNum)
-		esxIp6PortNum = GetorIgnoreStringEnvVar(envEsx6PortNum)
-		esxIp7PortNum = GetorIgnoreStringEnvVar(envEsx7PortNum)
-		esxIp8PortNum = GetorIgnoreStringEnvVar(envEsx8PortNum)
-		esxIp9PortNum = GetorIgnoreStringEnvVar(envEsx9PortNum)
-		esxIp10PortNum = GetorIgnoreStringEnvVar(envEsx10PortNum)
+		EsxIp1 = GetorIgnoreStringEnvVar(EnvEsxIp1)
+		EsxIp1PortNum = GetorIgnoreStringEnvVar(EnvEsx1PortNum)
+		EsxIp2PortNum = GetorIgnoreStringEnvVar(EnvEsx2PortNum)
+		EsxIp3PortNum = GetorIgnoreStringEnvVar(EnvEsx3PortNum)
+		EsxIp4PortNum = GetorIgnoreStringEnvVar(EnvEsx4PortNum)
+		EsxIp5PortNum = GetorIgnoreStringEnvVar(EnvEsx5PortNum)
+		EsxIp6PortNum = GetorIgnoreStringEnvVar(EnvEsx6PortNum)
+		EsxIp7PortNum = GetorIgnoreStringEnvVar(EnvEsx7PortNum)
+		EsxIp8PortNum = GetorIgnoreStringEnvVar(EnvEsx8PortNum)
+		EsxIp9PortNum = GetorIgnoreStringEnvVar(EnvEsx9PortNum)
+		EsxIp10PortNum = GetorIgnoreStringEnvVar(EnvEsx10PortNum)
 
-		esxIp2 = GetorIgnoreStringEnvVar(envEsxIp2)
-		esxIp3 = GetorIgnoreStringEnvVar(envEsxIp3)
-		esxIp4 = GetorIgnoreStringEnvVar(envEsxIp4)
-		esxIp5 = GetorIgnoreStringEnvVar(envEsxIp5)
-		esxIp6 = GetorIgnoreStringEnvVar(envEsxIp6)
-		esxIp7 = GetorIgnoreStringEnvVar(envEsxIp7)
-		esxIp8 = GetorIgnoreStringEnvVar(envEsxIp8)
-		esxIp9 = GetorIgnoreStringEnvVar(envEsxIp9)
-		esxIp10 = GetorIgnoreStringEnvVar(envEsxIp10)
+		EsxIp2 = GetorIgnoreStringEnvVar(EnvEsxIp2)
+		EsxIp3 = GetorIgnoreStringEnvVar(EnvEsxIp3)
+		EsxIp4 = GetorIgnoreStringEnvVar(EnvEsxIp4)
+		EsxIp5 = GetorIgnoreStringEnvVar(EnvEsxIp5)
+		EsxIp6 = GetorIgnoreStringEnvVar(EnvEsxIp6)
+		EsxIp7 = GetorIgnoreStringEnvVar(EnvEsxIp7)
+		EsxIp8 = GetorIgnoreStringEnvVar(EnvEsxIp8)
+		EsxIp9 = GetorIgnoreStringEnvVar(EnvEsxIp9)
+		EsxIp10 = GetorIgnoreStringEnvVar(EnvEsxIp10)
 
-		safeInsertToMap(vcAddress, vcIp1SshPortNum)
-		safeInsertToMap(masterIP1, k8sMasterIp1PortNum)
-		safeInsertToMap(masterIP2, k8sMasterIp2PortNum)
-		safeInsertToMap(masterIP3, k8sMasterIp3PortNum)
-		safeInsertToMap(esxIp1, esxIp1PortNum)
-		safeInsertToMap(esxIp2, esxIp2PortNum)
-		safeInsertToMap(esxIp3, esxIp3PortNum)
-		safeInsertToMap(esxIp4, esxIp4PortNum)
-		safeInsertToMap(esxIp5, esxIp5PortNum)
-		safeInsertToMap(esxIp6, esxIp6PortNum)
-		safeInsertToMap(esxIp7, esxIp7PortNum)
-		safeInsertToMap(esxIp8, esxIp8PortNum)
-		safeInsertToMap(esxIp9, esxIp9PortNum)
-		safeInsertToMap(esxIp10, esxIp10PortNum)
+		safeInsertToMap(VcAddress, VcIp1SshPortNum)
+		safeInsertToMap(MasterIP1, K8sMasterIp1PortNum)
+		safeInsertToMap(MasterIP2, K8sMasterIp2PortNum)
+		safeInsertToMap(MasterIP3, K8sMasterIp3PortNum)
+		safeInsertToMap(EsxIp1, EsxIp1PortNum)
+		safeInsertToMap(EsxIp2, EsxIp2PortNum)
+		safeInsertToMap(EsxIp3, EsxIp3PortNum)
+		safeInsertToMap(EsxIp4, EsxIp4PortNum)
+		safeInsertToMap(EsxIp5, EsxIp5PortNum)
+		safeInsertToMap(EsxIp6, EsxIp6PortNum)
+		safeInsertToMap(EsxIp7, EsxIp7PortNum)
+		safeInsertToMap(EsxIp8, EsxIp8PortNum)
+		safeInsertToMap(EsxIp9, EsxIp9PortNum)
+		safeInsertToMap(EsxIp10, EsxIp10PortNum)
 	}
 
-	if len(missingEnvVars) > 0 {
+	if len(MissingEnvVars) > 0 {
 		ctx := context.Background()
 		log := logger.GetLogger(ctx)
-		log.Warnf("Missing environment variables: %v", strings.Join(missingEnvVars, ", "))
+		log.Warnf("Missing environment variables: %v", strings.Join(MissingEnvVars, ", "))
 	}
 }
